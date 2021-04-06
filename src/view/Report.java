@@ -252,7 +252,7 @@ public class Report extends javax.swing.JFrame {
                 + "\n                                         Demi Kenyamanan Anda Dimohon"
                 + "\n        Mengecek Terlebih Dahulu Faktur Pembayaran Yang Sudah Di Pegang"
                 + "\n=============================================================" + "\n" + "\n"
-                + "\n               *SPP PROJECT*" + "\n" + "\n" + "\n"
+                + "\n               *PETUGAS*" + "\n" + "\n" + "\n"
                 + "\n                       AURA MALIYA");
         }
     }//GEN-LAST:event_rep_transMouseReleased

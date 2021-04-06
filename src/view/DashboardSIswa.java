@@ -37,7 +37,7 @@ public class DashboardSIswa extends javax.swing.JFrame {
     
     }
      public void tabelTrans() {
-        String[] judul = {"Tanggal","No. Transaksi","NISN","Nama Siswa","Bulan Dibayar","Tahun","Jumlah Bayar","Petugas"};
+        String[] judul = {"No. Transaksi","ID Petugas","NISN","Tanggal", "Bulan Dibayar","Tahun Dibayar","ID Spp","Jumlah Bayar"};
         model = new DefaultTableModel(judul,0);
         tabelTransaksi.setModel(model);
         String sql = "SELECT * FROM pembayaran WHERE nisn = '"+nisn+"' ";

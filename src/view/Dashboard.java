@@ -14,6 +14,12 @@ import java.util.Map;
 import javax.swing.table.DefaultTableModel;
 import config.KoneksiDB;
 import config.UserSession;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 /**
  *
  * @author user
@@ -57,7 +63,7 @@ public class Dashboard extends javax.swing.JFrame {
         
         //block akses
         mnDataMaster.setVisible(false);
-        mnLaporan.setVisible(false);
+//        mnLaporan.setVisible(false);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -110,6 +116,7 @@ public class Dashboard extends javax.swing.JFrame {
         smTambah_trans = new javax.swing.JMenuItem();
         mnLaporan = new javax.swing.JMenu();
         smGenerate_laporan = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -417,6 +424,14 @@ public class Dashboard extends javax.swing.JFrame {
         });
         mnLaporan.add(smGenerate_laporan);
 
+        jMenuItem1.setText("Cetak Laporan");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        mnLaporan.add(jMenuItem1);
+
         jMenuBar1.add(mnLaporan);
 
         setJMenuBar(jMenuBar1);
@@ -498,6 +513,29 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_mnDataMasterActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        try {
+            KoneksiDB.getConnection();
+            try {
+                Map<String, Object> parameter = new HashMap<String, Object>();
+                
+                File rpt = new File("src/laporan/Lap_Trans.jrxml");
+                JasperDesign jasDesign = JRXmlLoader.load(rpt);
+                parameter.clear();
+                JasperReport jasReport = JasperCompileManager.compileReport(jasDesign);
+                JasperPrint jasPrint = net.sf.jasperreports.engine.JasperFillManager.fillReport(jasReport, 
+                        parameter, KoneksiDB.getConnection());
+                JasperViewer.viewReport(jasPrint, false);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Laporan tidak ditemukan" + e);
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(null, e);
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -548,6 +586,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
